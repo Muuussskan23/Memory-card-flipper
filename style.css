@@ -1,0 +1,85 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #0B1D51;
+}
+
+h1{
+    margin-top: 6rem;
+    color: aliceblue;
+}
+
+.status-bar {
+  width: 320px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-bar p {
+  margin: 0;
+  color: aliceblue;
+}
+
+.controls {
+  display: flex;
+  gap: 5px;
+}
+
+.game-board {
+  width: 320px;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 10px;
+}
+
+.card {
+  width: 70px;
+  height: 70px;
+  background: #507085;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.card.flipped {
+  background: #8CCDEB;
+  color: #333;
+}
+
+#matched-progress {
+  margin-top: 10px;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+#end-controls {
+  margin-top: 10px;
+}
+
+#end-controls div {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+button {
+  border-radius: 20px;  /* for pill/rounded button */
+  padding: 5px 10px;
+  border: none;
+  background: aliceblue;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2980b9;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Card Flipper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Memory Card Flipper</h1>
+
+  <div class="status-bar">
+    <p>Moves: <span id="moves">0</span> | Time: <span id="time">60</span>s</p>
+    <div class="controls">
+      <button id="pause">Pause</button>
+      <button id="retry">Retry</button>
+    </div>
+  </div>
+
+  <div class="game-board" id="gameBoard"></div>
+  <div id="matched-progress">Matched: <span id="matched">0</span> / 8</div>
+  <div id="end-controls"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
