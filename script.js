@@ -2,6 +2,8 @@ const symbols = ['🍎', '🍌', '🍇', '🍒', '🍉', '🍍', '🥝', '🍑']
 let cards, flippedCards, moves, matchedPairs, timeLeft, timer;
 const maxMoves = 30;
 const maxTime = 60;
+let paused = false;
+let gameOver = false;
 
 const board = document.getElementById('gameBoard');
 const movesSpan = document.getElementById('moves');
@@ -11,8 +13,6 @@ const pauseBtn = document.getElementById('pause');
 const retryBtn = document.getElementById('retry');
 const endControls = document.getElementById('end-controls');
 
-let paused = false;
-
 const sounds = {
   match: new Audio('https://www.soundjay.com/button/beep-07.wav'),
   mismatch: new Audio('https://www.soundjay.com/button/beep-10.wav'),
@@ -20,14 +20,18 @@ const sounds = {
   lose: new Audio('https://www.soundjay.com/button/beep-05.wav')
 };
 
-startGame();
-
 pauseBtn.addEventListener('click', () => {
+  if (gameOver) return;
   paused = !paused;
   pauseBtn.textContent = paused ? 'Resume' : 'Pause';
 });
 
-retryBtn.addEventListener('click', startGame);
+retryBtn.addEventListener('click', () => {
+  if (gameOver) return;
+  startGame();
+});
+
+startGame();
 
 function startGame() {
   clearInterval(timer);
@@ -37,11 +41,16 @@ function startGame() {
   matchedPairs = 0;
   timeLeft = maxTime;
   flippedCards = [];
+  paused = false;
+  gameOver = false;
+
   movesSpan.textContent = moves;
   timeSpan.textContent = timeLeft;
   matchedSpan.textContent = matchedPairs;
   pauseBtn.textContent = 'Pause';
-  paused = false;
+
+  pauseBtn.disabled = false;
+  retryBtn.disabled = false;
 
   cards = shuffle(symbols.concat(symbols));
   cards.forEach(symbol => {
@@ -63,7 +72,7 @@ function startGame() {
 
 board.addEventListener('click', e => {
   const clicked = e.target;
-  if (!clicked.classList.contains('card') || clicked.classList.contains('flipped') || flippedCards.length === 2 || paused) return;
+  if (gameOver || !clicked.classList.contains('card') || clicked.classList.contains('flipped') || flippedCards.length === 2 || paused) return;
 
   flipCard(clicked);
   flippedCards.push(clicked);
@@ -112,7 +121,11 @@ function shuffle(array) {
 function endGame(win) {
   clearInterval(timer);
   board.style.pointerEvents = 'none';
-  
+  gameOver = true;
+
+  pauseBtn.disabled = true;
+  retryBtn.disabled = true;
+
   const msg = document.createElement('div');
   msg.textContent = win ? '🎉 You won the game!' : '💥 You lost the game!';
   msg.style.color = win ? '#2ecc71' : '#e74c3c';
