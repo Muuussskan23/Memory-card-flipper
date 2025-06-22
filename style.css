@@ -4,9 +4,9 @@ body {
   background: #0B1D51;
 }
 
-h1{
-    margin-top: 6rem;
-    color: aliceblue;
+h1 {
+  margin-top: 6rem;
+  color: aliceblue;
 }
 
 .status-bar {
@@ -71,7 +71,7 @@ h1{
 }
 
 button {
-  border-radius: 20px;  /* for pill/rounded button */
+  border-radius: 20px;
   padding: 5px 10px;
   border: none;
   background: aliceblue;
